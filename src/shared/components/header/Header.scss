@@ -1,0 +1,27 @@
+.app-header {
+    width: 90%;
+    max-height: 100px;
+    display: flex !important;
+    align-items: center !important;
+    flex-direction: row;
+    justify-content: space-between !important;
+    padding: 0.5% 5%;
+    position: fixed; 
+    top: 0; 
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: white;
+    z-index: 1000; 
+}
+
+h1 {
+    font-size: 3.2em;
+    line-height: 1.1;
+  }
+
+nav {
+    display: flex !important;
+    align-items: center !important;
+    flex-direction: row;
+    justify-content: space-between!important;
+}

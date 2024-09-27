@@ -1,0 +1,19 @@
+.photos-feed {
+    padding: 1% 0%;
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+    align-items: center;
+
+    .photo-item {
+        max-width: 30%;
+        display: flex;
+        flex-direction: column;
+        gap: 32px;
+    }
+
+    .image-feed {
+        width: 300px;
+        height: auto;
+    }
+}
