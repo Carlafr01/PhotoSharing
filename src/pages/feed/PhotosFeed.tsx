@@ -1,12 +1,16 @@
 import React, { useEffect, useRef, useState } from 'react';
-import './PhotosFeed.scss';
 import { useAlbums } from '../../context/albumsContext';
 import { useUsers } from '../../context/usersContext';
 import { usePhotos } from '../../context/photosContext';
+
 import Loading from '../../shared/components/loading/Loading';
-import { updatePhotosWithUser } from '../../services/photosServices';
 import Card from '../../shared/components/card/Card';
+
+import { updatePhotosWithUser } from '../../services/photosServices';
+
 import { Photo } from '../../types/photoTypes';
+
+import './PhotosFeed.scss';
 
 const PhotosFeed: React.FC = () => {
   const { state: statePhotos } = usePhotos();

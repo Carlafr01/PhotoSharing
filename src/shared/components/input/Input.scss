@@ -2,15 +2,15 @@
     display: flex;
     flex-direction: column;
     margin-bottom: 1rem;
-  }
+}
   
-  .input-label {
+.input-label {
     font-size: 1rem;
     margin-bottom: 5px;
     color: #333;
-  }
+}
   
-  .input-default {
+.input-default {
     padding: 10px;
     font-size: 16px;
     border: 1px solid #ccc;
@@ -26,5 +26,5 @@
       background-color: #f5f5f5;
       cursor: not-allowed;
     }
-  }
+}
   

@@ -4,32 +4,32 @@
     flex-direction: column;
     width: auto;
     margin-bottom: 1rem;
-  }
+}
   
-  .upload-label {
+.upload-label {
     font-size: 1rem;
     color: #333;
-  }
+}
   
-  .upload-input {
+.upload-input {
     padding: 10px;
     border-radius: 4px;
     border: 1px solid #ccc;
     margin-bottom: 16px;
     cursor: pointer;
-  }
+}
   
-  .uploaded-image {
+.uploaded-image {
     margin-top: 16px;
     width: 200px;
     height: 200px;
     border-radius: 4px;
     border: 1px solid #ccc;
     object-fit: cover;
-  }
+}
   
-  .upload-input:hover {
+.upload-input:hover {
     background-color: #f0f0f0;
     transform: scale(1.05);
-  }
+}
   

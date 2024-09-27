@@ -8,38 +8,38 @@
     display: flex;
     justify-content: center;
     align-items: center;
-  }
+}
   
-  .modal-container {
+.modal-container {
     background-color: white;
     padding: 20px;
     border-radius: 8px;
     width: 400px;
-  }
+}
   
-  .modal-header {
+.modal-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-  }
+}
   
-  .close-button {
+.close-button {
     background: none;
     border: none;
     font-size: 1.5rem;
     cursor: pointer;
-  }
+}
   
-  .modal-body {
+.modal-body {
     margin-top: 10px;
     margin-bottom: 10px;
-  }
+}
   
-  .modal-footer {
+.modal-footer {
     display: flex;
     justify-content: flex-end;
     gap: 10px;
-  }
+}
 
   
   

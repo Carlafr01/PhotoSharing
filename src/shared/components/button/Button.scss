@@ -11,22 +11,22 @@
     height: fit-content;
   }
   
-  .custom-button:hover {
+.custom-button:hover {
     background-color: #005bb5;
     transform: scale(1.05);
-  }
+}
   
-  .custom-button:focus {
+.custom-button:focus {
     outline: none;
     box-shadow: 0 0 5px rgba(0, 102, 204, 0.5);
-  }
+}
   
-  .custom-button.disabled {
+.custom-button.disabled {
     background-color: #ccc;
     cursor: not-allowed;
     pointer-events: none;
     opacity: 0.7;
-  }
+}
 
   
   
