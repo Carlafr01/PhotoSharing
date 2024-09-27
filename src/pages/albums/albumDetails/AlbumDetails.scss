@@ -4,16 +4,26 @@
   align-items: center;
   flex-direction: column;
 
+  .photos-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 0.6fr);
+    gap: 32px;
+    justify-items: center;
+    overflow: hidden;
+    max-width: 100%;
+  }
+
   p {
       font-size: 1.5rem;
       padding-bottom: 50px;
       font-weight: 600;
   }
 
-  .photos-grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 16px;
+  .image-photo {
+    object-fit: cover; 
+    width: 300px;
+    height: 300px;
+    border-radius: 4px; 
   }
 
 }

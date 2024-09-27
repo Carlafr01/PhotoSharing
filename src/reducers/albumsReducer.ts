@@ -1,4 +1,5 @@
-import { Album, Photo } from '../types/types';
+import { Album } from '../types/albumTypes';
+import { Photo } from '../types/photoTypes';
 
 interface AlbumsState {
   albums: Album[];

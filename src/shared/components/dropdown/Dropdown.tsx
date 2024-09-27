@@ -21,7 +21,7 @@ const Dropdown: React.FC<DropdownProps> = ({ title, options, onSelect }) => {
   };
 
   return (
-    <div className="select-container">
+    <div className="dropdown-container">
       <Button className="custom-select" onClick={toggleDropdown}>
         {title}
       </Button>

@@ -1,29 +1,33 @@
 import React, { useEffect, useState } from 'react';
 import { useAlbums } from '../../../context/albumsContext';
-import Button from '../../../shared/components/button/Button';
-import './MyAlbums.scss';
+import { usePhotos } from '../../../context/photosContext';
 import { useUsers } from '../../../context/usersContext';
+import { useNavigate } from 'react-router-dom';
+
 import {
   getAllAlbumsFromUserId,
   sortAlbumsByPhotoCount,
 } from '../../../services/albumsServices';
-import { usePhotos } from '../../../context/photosContext';
-import { useNavigate } from 'react-router-dom';
-import Search from '../../../shared/components/search/Search';
-import Loading from '../../../shared/components/loading/Loading';
-import Modal from '../../../shared/components/modal/Modal';
-import Input from '../../../shared/components/input/Input';
 import {
   getLocalUser,
   getUserDataByUsername,
 } from '../../../services/usersServices';
 import { getAllPhotosFromAlbum } from '../../../services/photosServices';
-import { Album } from '../../../types/albumTypes';
-import { User } from '../../../types/userTypes';
+
+import './MyAlbums.scss';
+
+import Button from '../../../shared/components/button/Button';
+import Search from '../../../shared/components/search/Search';
+import Loading from '../../../shared/components/loading/Loading';
+import Modal from '../../../shared/components/modal/Modal';
+import Input from '../../../shared/components/input/Input';
 import Card from '../../../shared/components/card/Card';
 import Dropdown from '../../../shared/components/dropdown/Dropdown';
 
-const AlbumsFeed: React.FC = () => {
+import { Album } from '../../../types/albumTypes';
+import { User } from '../../../types/userTypes';
+
+const MyAlbums: React.FC = () => {
   const navigate = useNavigate();
   const {
     state: stateAlbums,
@@ -34,6 +38,7 @@ const AlbumsFeed: React.FC = () => {
   } = useAlbums();
   const { state: statePhotos } = usePhotos();
   const { state: stateUsers } = useUsers();
+
   const localUser = getLocalUser(stateUsers.users);
 
   const [albums, setAlbums] = useState<Album[]>([]);
@@ -56,13 +61,25 @@ const AlbumsFeed: React.FC = () => {
 
   useEffect(() => {
     handleSearch();
-  }, []);
-
-  useEffect(() => {
-    handleSearch();
   }, [stateAlbums.albums]);
 
-  const getPhotosAlbum = async (filteredAlbums: Album[]) => {
+  const handleSearch = () => {
+    const user = getUserDataByUsername(userSearch, stateUsers.users);
+    setUserData(user);
+
+    if (user) {
+      const filteredAlbums = getAllAlbumsFromUserId(
+        user.id,
+        stateAlbums.albums
+      );
+      setAlbums(filteredAlbums);
+      loadPhotosAlbum(filteredAlbums);
+    } else {
+      setAlbums([]);
+    }
+  };
+
+  const loadPhotosAlbum = async (filteredAlbums: Album[]) => {
     if (filteredAlbums.length > 0) {
       setLoading(true);
       filteredAlbums.forEach((album) => {
@@ -81,26 +98,12 @@ const AlbumsFeed: React.FC = () => {
     setAlbums(sortedAlbumPhotos);
   };
 
-  const handleSearch = () => {
-    const user = getUserDataByUsername(userSearch, stateUsers.users);
-    setUserData(user);
-
-    if (user) {
-      const filteredAlbums = getAllAlbumsFromUserId(
-        user.id,
-        stateAlbums.albums
-      );
-      setAlbums(filteredAlbums);
-      getPhotosAlbum(filteredAlbums);
-    } else {
-      setAlbums([]);
-    }
-  };
-
   const handleAddAlbum = () => {
     if (localUser) {
       const newAlbum = { id: 0, userId: localUser.id, title: newTitle };
       addAlbum(newAlbum);
+      setUserSearch(localUser.username);
+      handleSearch();
       closeModal();
     }
   };
@@ -191,6 +194,7 @@ const AlbumsFeed: React.FC = () => {
               type="text"
               value={newTitle}
               onChange={(e) => setNewTitle(e.target.value)}
+              max={30}
             />
           </div>
         </Modal>
@@ -199,4 +203,4 @@ const AlbumsFeed: React.FC = () => {
   );
 };
 
-export default AlbumsFeed;
+export default MyAlbums;

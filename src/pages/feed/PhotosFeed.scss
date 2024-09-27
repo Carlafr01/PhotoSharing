@@ -7,6 +7,7 @@
 
     .photo-item {
         max-width: 30%;
+        min-width: 320px;
         display: flex;
         flex-direction: column;
         gap: 32px;
@@ -14,6 +15,6 @@
 
     .image-feed {
         width: 300px;
-        height: auto;
+        height: 300px;
     }
 }

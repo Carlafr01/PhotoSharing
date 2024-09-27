@@ -9,22 +9,18 @@
     }
 }
 
-.form {
-    display: flex;
-    flex-direction: column;
-    gap: 16px; 
-    max-width: 100%;
   
-    .form-group {
+  .form-group {
       display: flex;
       flex-direction: column;
+      justify-content: space-between;
+      gap: 16px;
       align-items: flex-start;
 
-      .form-field{
+      .form-field {
         width: 100% !important;
       }
       
     }
 
-  }
   

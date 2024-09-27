@@ -9,6 +9,7 @@ interface InputProps {
   type?: string;
   disabled?: boolean;
   accept?: string;
+  max?: number;
 }
 
 const Input: React.FC<InputProps> = ({
@@ -19,6 +20,7 @@ const Input: React.FC<InputProps> = ({
   type = 'text',
   disabled = false,
   accept,
+  max = 50,
 }) => {
   return (
     <div className="input-default-wrapper">
@@ -31,6 +33,7 @@ const Input: React.FC<InputProps> = ({
         onChange={onChange}
         disabled={disabled}
         accept={accept}
+        max={max}
       />
     </div>
   );

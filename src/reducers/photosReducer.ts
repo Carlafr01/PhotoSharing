@@ -1,5 +1,4 @@
-// photosReducer.ts
-import { Photo } from '../types/types';
+import { Photo } from '../types/photoTypes';
 
 interface PhotosState {
   photos: Photo[];
@@ -23,7 +22,7 @@ export const photosReducer = (
     case 'SET_PHOTOS':
       return { ...state, photos: action.payload };
     case 'ADD_PHOTO':
-      return { ...state, photos: [...state.photos, action.payload] };
+      return { ...state, photos: [action.payload, ...state.photos] };
     case 'UPDATE_PHOTO':
       return {
         ...state,

@@ -1,21 +1,26 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
+
+import Card from '../../../shared/components/card/Card';
+import Modal from '../../../shared/components/modal/Modal';
+import Input from '../../../shared/components/input/Input';
+
 import { useAlbums } from '../../../context/albumsContext';
 import { useUsers } from '../../../context/usersContext';
-import { Album } from '../../../types/albumTypes';
-import { Photo } from '../../../types/photoTypes';
-import { User } from '../../../types/userTypes';
-import './AlbumDetails.scss';
-import { getLocalUser } from '../../../services/usersServices';
-import Card from '../../../shared/components/card/Card';
 import { usePhotos } from '../../../context/photosContext';
+
+import { getLocalUser } from '../../../services/usersServices';
 import {
   getAlbumById,
   getAlbumOwner,
   getAlbumPhotos,
 } from '../../../services/albumsServices';
-import Modal from '../../../shared/components/modal/Modal';
-import Input from '../../../shared/components/input/Input';
+
+import { Album } from '../../../types/albumTypes';
+import { Photo } from '../../../types/photoTypes';
+import { User } from '../../../types/userTypes';
+
+import './AlbumDetails.scss';
 
 const AlbumDetails: React.FC = () => {
   const { albumId } = useParams<{ albumId: string }>();
@@ -30,13 +35,11 @@ const AlbumDetails: React.FC = () => {
   const [selectedAlbumPhotos, setSelectedAlbumPhotos] = useState<Photo[]>([]);
   const [albumOwner, setAlbumOwner] = useState<User>();
   const [newPhotoTitle, setNewPhotoTitle] = useState<string>('');
-  const [modalData, setModalData] = useState<{
-    isOpen: boolean;
-    id?: number;
-  }>({
+  const [modalData, setModalData] = useState<{ isOpen: boolean; id?: number }>({
     isOpen: false,
     id: 0,
   });
+
   const isLocalUserPage = albumOwner?.username === localUser?.username;
 
   useEffect(() => {
@@ -48,14 +51,14 @@ const AlbumDetails: React.FC = () => {
       setAlbumOwner(selectedOwner);
       setSelectedAlbumPhotos(selectedPhotos ?? []);
     }
-  }, [albums.albumPhotos]);
+  }, [albumId, albums.albums, albums.albumPhotos, users.users]);
 
   const handleUpdatePhoto = () => {
     if (localUser && modalData.id && selectedAlbumData) {
       const updatedPhoto: Photo = {
         id: modalData.id,
         userId: localUser.id,
-        title: newPhotoTitle, // Update only the title
+        title: newPhotoTitle,
         albumId: selectedAlbumData.id,
         url:
           selectedAlbumPhotos.find((photo) => photo.id === modalData.id)?.url ??
@@ -64,6 +67,7 @@ const AlbumDetails: React.FC = () => {
           selectedAlbumPhotos.find((photo) => photo.id === modalData.id)
             ?.thumbnailUrl ?? '',
       };
+
       updatePhoto(updatedPhoto);
       setSelectedAlbumPhotos((prevPhotos) =>
         prevPhotos.map((photo) =>
@@ -97,7 +101,11 @@ const AlbumDetails: React.FC = () => {
             onEdit={() => setModalData({ isOpen: true, id: photo.id })}
             onDelete={handleDeletePhoto}
           >
-            <img src={photo.url} alt={`A view of ${photo.title}`} />
+            <img
+              className="image-photo"
+              src={photo.url}
+              alt={`A view of ${photo.title}`}
+            />
           </Card>
         ))}
         {modalData.isOpen && (
@@ -105,7 +113,7 @@ const AlbumDetails: React.FC = () => {
             title={'Edit Photo Title'}
             isOpen={modalData.isOpen}
             onConfirm={handleUpdatePhoto}
-            onClose={() => setModalData({ isOpen: true })}
+            onClose={() => setModalData({ isOpen: false })}
           >
             <div className="modal-edit-content">
               <Input

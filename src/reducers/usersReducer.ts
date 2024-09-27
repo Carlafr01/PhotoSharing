@@ -1,5 +1,4 @@
-// usersReducer.ts
-import { User } from '../types/types';
+import { User } from '../types/userTypes';
 
 interface UsersState {
   users: User[];

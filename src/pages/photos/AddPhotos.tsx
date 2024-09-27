@@ -43,6 +43,7 @@ const AddPhoto = () => {
             label="Title"
             value={title}
             onChange={(e) => setTitle(e.target.value)}
+            max={30}
           />
         </div>
         <div className="form-field">
